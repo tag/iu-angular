@@ -8,6 +8,7 @@
 
   - Create a file for your model. For simplicity, name your file the same as
     the class name: `php/Model/StockPrice.php`
+
   - Class names are typically capitalized.
 
 - [ ] Brief explanation of classes and instances
