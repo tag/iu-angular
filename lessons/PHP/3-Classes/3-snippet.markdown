@@ -2,11 +2,12 @@
 
 - [ ] Explain model objects (a representation of what we will be returning); mention MVC pattern
 
-- [ ] Create a folder for your models: `php-app/Model`
+- [ ] Create a folder for your models: `php/Model`
 
 - [ ] Make a class file:
+
   - Create a file for your model. For simplicity, name your file the same as
-    the class name: `php/Model/StockPRice.php`
+    the class name: `php/Model/StockPrice.php`
   - Class names are typically capitalized.
 
 - [ ] Brief explanation of classes and instances
@@ -168,7 +169,7 @@
     ```php
     <?php      // api/StockPrice.php
     
-    require '../php-app/Model/StockPrice.php';
+    require '../app/Model/StockPrice.php';
     
     $arr = array();
     
@@ -221,7 +222,7 @@
     - The "magic constant" `__DIR__` is always equal to the current directory
       of the current file.
     
-    - In `api/MasterTools.php`, add the following at the top of the file
+    - In `api/StockPrice.php`, add the following at the top of the file
       (instead of our previous `require` statement):
     
       ```php
