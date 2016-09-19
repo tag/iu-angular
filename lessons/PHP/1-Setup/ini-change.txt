@@ -1,1 +1,0 @@
-sudo sed -i '/^display_errors = Off/c\display_errors = On' /etc/php.ini; sudo apachectl restart
