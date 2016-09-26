@@ -1,0 +1,5 @@
+turbineId,turbineName,turbineDescription,capacity,rampUpTime,maintenanceInterval
+1,3SA.01,"The 3SA high efficiency, deep-water tidal turbine is an industry leader among S-class offerings.",429,12,32000
+2,3SA.02,"The 3SA high efficiency, deep-water tidal turbine is an industry leader among H-class offerings.",519,12,32000
+3,W7B.01,"This high efficiency wind turbine turbine is an industry leader among wind offerings.",280,10,22000
+4,SF9.06,"An optimum choice for solar power generation, this series of collectors operates at the cutting edge of efficiency.",82,29,42000

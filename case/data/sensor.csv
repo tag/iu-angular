@@ -1,0 +1,4 @@
+sensorId,sensorName,sensorDescription,manufacturer,totalLifeExpentancyHours
+1,LVDT,"LVDTs (Linear Variable Differential Transformers) are very commonly used as position sensors in power plants throughout the world.","Alliance Sensors Group",10000
+2,4L60E,"Input Shaft Speed Sensor","Alliance Sensors Group",10000
+3,BN350300,"Dynamic Pressure Sensor","Bently Nevada",10000

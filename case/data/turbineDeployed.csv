@@ -1,0 +1,4 @@
+turbineDeployedId,turbineId,siteId,serialNumber,deployedDate,totalFiredHours,totalStarts,lastPlannedOutageDate,lastUnplannedOutageDate
+1,1,1,9HA-01-IU0008,2016-07-01,3543,5,2016-06-01,NULL
+2,3,2,7HA-07-IU0121,2010-10-23,32543,21,2016-06-01,2013-05-13
+3,4,3,9F-06-IU0021,2000-02-16,123543,119,2016-06-01,2015-04-13
