@@ -1,0 +1,34 @@
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+h1 {
+    color: blue;
+    font-size: 18px;
+    /*
+      Fonts can be specified in % (base on inherited size from parent),
+      pixels (px) or point (pt). There are other possible units of measure as well,
+      but these will suffice.
+    */
+} 
+
+
+#welcomeMsg {
+    color: royalblue;
+    padding:  10px 10px 10px 10px;
+    /* 
+      "padding" is a shortcut for 
+      padding-top, padding-right, padding-bottom, padding-left
+     */
+}
+
+.content{
+    /* If you specify a color or background-color, it's good practice to specify both. */
+    background-color: red;
+    color: white;
+    
+    margin: 10px 10px ;
+    border: 2px solid purple;
+    padding: 10px 20px 10px 20px;
+}

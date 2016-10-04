@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Demo 2-Simple Form</title>
+        <link rel="stylesheet" type="text/css" href="css/site.css">
+    </head>
+    <body>
+
+        <div id="navBar">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="myForm.html">Form Example</a></li>
+                <li><a href="myTable.html">Table Example</a></li>
+                <li><a href="http://bing.com">Search</a></li>  
+            </ul>
+        </div>
+        
+        <div id="welcomeMsg" class="content">
+            <h1>Hello World!</h1>
+            <p>Welcome to <strong>Bloomington</strong>!</p>
+        </div>
+
+        <div id="main" class="content">
+            <form action="api/StockPrice/byDate.php" method="get">
+            <p>
+                <label for="ticker">Ticker:</label>
+                <input id="ticker" name="ticker">
+            </p>
+            <p>
+                <label for="date">Date:</label>
+                <input id="date" name="date">
+            </p>
+               <input type="submit" value="Go!"> 
+            </form>
+        </div>
+    </body>
+</html> 
