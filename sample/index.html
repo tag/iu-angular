@@ -1,0 +1,89 @@
+<DOCTYPE! html>
+<html lang="en">
+<head>
+    <title>Steve-base</title>
+    
+    <!-- simplify a bit by using the CDN versions of Bootstrap, jQuery, and AngularJS -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    
+    <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+
+    <!-- Now, my local files -->
+    <link rel="stylesheet" href="css/site.css">
+    <script src="js/app.js"></script>
+</head>
+
+<body ng-app="userApp">
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#">My Database of Steves</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Link</a></li>
+      </ul>
+      
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container-fluid" style="min-height:80%">
+    <div class="row" style="height:100%" ng-controller="UserController as userCtl">
+        <div id="userList" class="col-sm-3">
+            <div class="user" ng-repeat="user in userCtl.list" id="user{{user.id}}">        
+                  <a ng-click="userCtl.getUser(user.id)">{{user.firstName}} {{user.lastName}}</a>
+            </div>
+        </div> <!-- end userList -->
+        
+        <div class="details col-sm-7 col-sm-offset-1">
+        <div id="userDetails">
+            <p><label>First Name:</label> {{userCtl.currentUser.firstName}}</p>
+            <p><label>Last Name:</label> {{userCtl.currentUser.lastName}}</p>
+            <p><label>Email:</label> {{userCtl.currentUser.email}}</p>
+            <p><label>Description:</label><br>{{userCtl.currentUser.description}}</p>
+        </div>
+        
+        <div id="userNewForm" style="border: 1px dotted red; display:none">
+            <form class="form-horizontal">
+              <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                <div class="col-sm-10">
+                  <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                <div class="col-sm-10">
+                  <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox"> Remember me
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-default">Sign in</button>
+                </div>
+              </div>
+            </form>
+        </div>
+        
+        </div> <!-- end .details -->
+    </div> <!-- end .row -->
+</div>
+</body>
+</html>
