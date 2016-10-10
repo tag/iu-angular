@@ -67,7 +67,7 @@
         </thead>
         <tbody>
             <tr>
-                <td>DISN
+                <td>DISN</td>
                 <td>92.8</td>
                 <td>151.0 B</td>
             </tr>
