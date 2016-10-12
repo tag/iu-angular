@@ -36,8 +36,11 @@ VALUES (7, "Stephen", "Colbert", "funny@example.com", "No one is really sure how
 INSERT INTO AllTheSteves (id, firstName, lastName, email, description)
 VALUES (8, "Steve", "Balmer", "chairs@example.com", "Threw chairs. Might have changed his name to be more like the other Steve.");
 
+INSERT INTO AllTheSteves (id, firstName, lastName, email, description)
+VALUES (9, "Stephen", "Strange", "agamatto@example.com", "Cumberbatch seems like a good choice.");
+
 ----
-SteveNumbers
+-- SteveNumbers
 ----
 
 CREATE TABLE SteveNumbers (
