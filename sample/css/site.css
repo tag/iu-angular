@@ -9,13 +9,15 @@ body {
     color:white;
 }
 
-.details {
+#userList {
+    padding: 8px;
+}
+#userContent {
+    z-index: -1;
+    padding: 1em 2em;
     background-color:white;
     color: #333;
     border-radius: 20px;
-}
-#userList{
-    padding:8px;
 }
 .user {
     padding:6px;
