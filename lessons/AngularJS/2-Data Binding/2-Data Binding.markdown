@@ -2,7 +2,7 @@
 
   - [ ] Review: We created the app, and created the controller in `index.app.js`
   
-  - [ ] Review: We linked the controller (jjs) to the vie (HTML) using `ng-controller`
+  - [ ] Review: We linked the controller (js) to the view (HTML) using `ng-controller`
   
   - [ ] Review: We used the double curly brace (mustache) in our HTML file to display data in our tempalate
   
@@ -76,7 +76,7 @@
   - [ ] The table looks ugly; let's make some improvements:
   
     - Bootstrap's `table` class helps, as does `table-striped`
-    - Add a "$" 
+    - Add a "$" to the close value
   
 	```html
     <div ng-controller="TickerController as tkCtrl" class="row">
