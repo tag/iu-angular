@@ -85,8 +85,23 @@
 	
   - [ ] Update the handler
     
-    - Add the new ticker data to the array
+    - Add (push) the new ticker data to the array
     - Reset `newTickerData`
+    
+    ```js
+    self.addTickerData = function() {
+        console.log("Adding new data!");
+        
+        // NOTE: This is not yet altering data on the server!
+        self.tickerData.push(self.newTickerData);
+        
+        self.newTickerData = {
+            ticker: '',
+            date: '',
+            close: 0
+        };
+    }
+    ```
 
   - [ ] Test!
   
