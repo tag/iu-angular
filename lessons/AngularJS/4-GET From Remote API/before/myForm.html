@@ -1,0 +1,55 @@
+<html>
+<head>
+    <title>Simple Form Demo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/site.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header"> <!-- This stuff here makes the "hamburger" button when the screen is too narrow. Requires the bootstrap js (which we haven't included, yet.) -->
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Brand</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="index.html">Home</a></li>
+            <li class="active"><a href="myForm.html">Stock Form</a></li>
+            <li><a href="myTable.html">Table Example</a></li>
+            <li><a href="api/StockPrice.php">Stock API</a></li>
+      </ul>
+      
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav> 
+<div class="container" id="main"><!-- Bootstrap requires everything be wrapped in a .container class -->
+    <div class="row content">
+        <h1>This is my heading</h1>
+        <p>Lorem ipsem dolar sit amet.</p>
+    </div>
+
+    <div class="row">
+    <form action="api/StockPrice/byDate.php" method="get">
+      <div class="form-group">
+        <label for="ticker">Ticker:</label>
+        <input id="ticker" name="ticker" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="date">Date:</label>
+        <input id="date" name="date" type="date" class="form-control" placeholder="YYYY-MM-DD">
+      </div>
+      
+      <button type="submit" class="btn btn-primary">Go!</button>
+    </form>
+    </div>
+</div> <!-- end .container -->
+</body>
+</html>
