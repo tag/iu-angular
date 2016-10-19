@@ -1,4 +1,4 @@
-#Demo 2 - Data Binding
+#2 - Data Binding
 
   - [ ] Review: We created the app, and created the controller in `index.app.js`
   
