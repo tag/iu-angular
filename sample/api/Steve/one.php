@@ -1,5 +1,5 @@
 <?php
-require('../app/environment.php');
+require('../../app/environment.php');
 
 $db = new PDO(DB_CONNECT, DB_USER, DB_PASSWORD); 
 

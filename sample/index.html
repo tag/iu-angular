@@ -35,51 +35,71 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-<div class="container-fluid" style="min-height:80%">
-    <div class="row" style="height:100%" ng-controller="UserController as userCtl">
+<div class="container-fluid" style="min-height:80%" ng-controller="UserController as userCtl">
+    <div class="row" style="height:100%">
         <div id="userList" class="col-sm-3">
             <div class="user" ng-repeat="user in userCtl.list" id="user{{user.id}}">        
-                  <a ng-click="userCtl.getUser(user.id)">{{user.firstName}} {{user.lastName}}</a>
+                  <a ng-click="userCtl.showUserDetails(user.id)">{{user.firstName}} {{user.lastName}}</a>
+            </div>
+            <div class="user" id="createButtonDiv">
+                <button ng-click="userCtl.showUserForm('create')" class="btn btn-default">Add a Steve</button>
             </div>
         </div> <!-- end userList -->
         
-        <div class="details col-sm-7 col-sm-offset-1">
-        <div id="userDetails">
-            <p><label>First Name:</label> {{userCtl.currentUser.firstName}}</p>
-            <p><label>Last Name:</label> {{userCtl.currentUser.lastName}}</p>
-            <p><label>Email:</label> {{userCtl.currentUser.email}}</p>
-            <p><label>Description:</label><br>{{userCtl.currentUser.description}}</p>
-        </div>
-        
-        <div id="userNewForm" style="border: 1px dotted red; display:none">
-            <form class="form-horizontal">
+        <div id="userContent" class="details col-sm-8" ng-show="userCtl.currentUser">
+            
+            <!-- #userDetails and the #userForm could have been designed as 
+                 separate elements. Indeed early iterations worked that way. 
+                 However, keeping the same label styling is useful, and
+                 this design uses `ng-show` and `ng-hide` attributes instead,
+                 which ends up being much easier. 
+                
+                 With `ng-show`, when the value of the attribute it true, the
+                 element is shown, otherwise it's hidden. `ng-hide` works similarly.
+            -->
+        <div id="userDetails" ng-hide="empty(userCtl.currentUser)">
+            <form class="form-horizontal" ng-submit="userCtl.handleFormSubmit()">
+                <input type="hidden" id="inpId" name="id" ng-model="userCtl.currentUser.id">
               <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                <label for="inpFirstName" class="col-sm-2 control-label">First Name:</label>
                 <div class="col-sm-10">
-                  <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                  <input type="text" class="form-control" id="inpFirstName" name="firstName" ng-model="userCtl.currentUser.firstName" ng-show="userCtl.showForm">
+                  <p class="form-control-static" ng-hide="userCtl.showForm">{{ userCtl.currentUser.firstName }}</p>
                 </div>
               </div>
               <div class="form-group">
-                <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                <label for="inpLastName" class="col-sm-2 control-label">Last Name:</label>
                 <div class="col-sm-10">
-                  <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                  <input type="text" class="form-control" id="inpLastName" name="lastName" ng-model="userCtl.currentUser.lastName" ng-show="userCtl.showForm">
+                  <p class="form-control-static" ng-hide="userCtl.showForm">{{ userCtl.currentUser.lastName }}</p>
                 </div>
               </div>
+              <div class="form-group">
+                <label for="inpEmail" class="col-sm-2 control-label">Email:</label>
+                <div class="col-sm-10">
+                  <input type="email" class="form-control" id="inpEmail" name="email" ng-model="userCtl.currentUser.email" ng-show="userCtl.showForm">
+                  <p class="form-control-static" ng-hide="userCtl.showForm">{{ userCtl.currentUser.email }}</p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inpDescription" class="col-sm-2 control-label">Description:</label>
+                <div class="col-sm-10">
+                  <textarea class="form-control" id="inpDescription" name="description" ng-model="userCtl.currentUser.description" ng-show="userCtl.showForm"></textarea>
+                  <p class="form-control-static" ng-hide="userCtl.showForm">{{ userCtl.currentUser.description }}</p>
+                </div>
+              </div>
+              
               <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                  <div class="checkbox">
-                    <label>
-                      <input type="checkbox"> Remember me
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                  <button type="submit" class="btn btn-default">Sign in</button>
+                  <button type="submit" class="btn btn-submit btn-primary" ng-show="userCtl.showForm">{{userCtl.buttonText}}</button>
                 </div>
               </div>
             </form>
+            
+            <!-- Make a link look like a button, with the "btn" class: -->
+            <a ng-click="userCtl.showUserForm('update')" class="pull-right btn btn-primary" ng-hide="userCtl.showForm">
+                <span class="glyphicon glyphicon-pencil"></span> Edit
+            </a>
         </div>
         
         </div> <!-- end .details -->
