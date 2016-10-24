@@ -6,12 +6,12 @@
     
     - Add necessary components to `myForm.html`:
     
-      1. AngularJS script file tag
-      2. Local application script file tag
+      1. AngularJS `<script>` file tag
+      2. Local application `<script>` file tag
       3. `ngApp` directive
       4. `ngController` directive
     
-    - Create a variable in the app to hold the form values, and bind them 
+    - Create a variable in the app to hold the form values, and bind it 
       to the HTML form. (`ngModel`)
       
     - Create `ngSubmit` handler (look at `index.app.js` for a hint).
@@ -19,7 +19,7 @@
     - Have the form handler request data from `api/StockPrice/byDate.php`
     
     - What sort of data will be returned? Use `ngRepeat` to output.
-      (This can probably be mostly copied from )
+      (This can be mostly copied from `myTable.html`)
     
   - [ ] [`$http.get()`](https://docs.angularjs.org/api/ng/service/$http#get) takes
     a second paramter, an "options" object. Pass the JSON data to the `params` 
