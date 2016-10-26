@@ -3,7 +3,8 @@
   - [ ] REVIEW: What is a POST body?
     
     - POST bodies are typically url-form-encoded, but Angular sends raw JSON
-    
+
+## PHP    
   - [ ] Adapt our PHP API files to translate POST-ed JSON:
   
   ```PHP
@@ -143,3 +144,95 @@
 
   - [ ] Encourage students to build a delete page on their own. (It's almost
         exactly the same.) An example is included in the "after" folder.
+
+## HTML/AngularJS
+
+  - [ ] Modify the form on `index.html` to include all of the required fields.
+    
+    - Something similar to the following for each of ticker, date, open, 
+      close, adjusted close, high, low, and volume:
+      
+      ```html
+      <!-- FILE: index.html-->
+      
+      <div class="form-group">
+        <label for="inpClose">Open</label>
+        <div class="input-group">
+          <span class="input-group-addon">$</span>
+          <input type="number" class="form-control" id="inpClose" min="0" ng-model="tkCtrl.newTickerData.open">
+        </div>
+      </div>
+      ```
+  
+  - [ ] Modify our bound variables in the js file too.
+  
+    ```js
+    // FILE: js/index.app.js
+    // This code needs to be in two places
+    
+    self.newTickerData = {
+        ticker:  '',
+        date:    '',
+        open:     0,
+        close:    0,
+        adjClose: 0,
+        high:     0,
+        low:      0,
+        volume:   0
+    };
+    ```
+  
+  - [ ] Instead of simply pushing the data to the local array, modify the form 
+        handler to POST to our API.
+
+  - [ ] Unlike `$http.get()`, the second paramter of `$http.post()` is the data
+        to be POSTed. (As opposed to a hash of configuration options.)
+        
+    ```js    
+    // FILE: index.app.js
+    
+    self.addTickerData = function() {
+      console.log("Adding!");
+        
+        $http.post(
+            'api/StockPrice/create.php',
+            self.newTickerData
+        ).then(
+            function successCallback(response) {
+                //TODO: Reload data
+                
+                self.newTickerData = {
+                    ticker:  '',
+                    date:    '',
+                    open:     0,
+                    close:    0,
+                    adjClose: 0,
+                    high:     0,
+                    low:      0,
+                    volume:   0
+                }; 
+            },
+            function errorCallback(err) {
+                console.log("ERROR", err);
+            }
+        );
+    };
+    ```
+    
+  - [ ] Because of how we wrote our GET API, it might not be easy to confirm 
+        the POST worked.
+        
+        - Let's change the GET API to return the most recent results for a
+          ticker symbol:
+        
+        ```PHP
+        // FILE: api/StockPrice.php
+        
+        // Warning: This returns *many* rows without the LIMIT!
+        $statement = $db->prepare('SELECT * FROM StockPrice ORDER BY date DESC LIMIT 10'); 
+        ```
+        
+  - [ ] The index file should show dynamic data, rather than static data:
+  
+  
+  

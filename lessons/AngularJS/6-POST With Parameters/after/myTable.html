@@ -1,0 +1,81 @@
+<html>
+<head>
+    <title>Simple Table Demo</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/site.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script type="text/javascript" src="js/myTable.app.js"></script>
+</head>
+<body ng-app="app">
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header"> <!-- This stuff here makes the "hamburger" button when the screen is too narrow. Requires the bootstrap js (which we haven't included, yet.) -->
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Brand</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="index.html">Home</a></li>
+            <li><a href="myForm.html">Stock Form</a></li>
+            <li class="active"><a href="myTable.html">Table Example</a></li>
+            <li><a href="api/StockPrice.php">Stock API</a></li>
+      </ul>
+      
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav> 
+    
+    <div class="container" id="main"><!-- Bootstrap requires everything be wrapped in a .container class -->        
+        <table class="dataTable">
+        <thead>
+            <tr>
+                <th>Company</th>
+                <th>Price</th>
+                <th>Market Cap</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>DISN</td>
+                <td>$92.8</td>
+                <td>$151.0 B</td>
+            </tr>
+            <tr>
+                <td>TWTR</td>
+                <td>$23.05</td>
+                <td>$16.3 B</td>
+            </tr>
+        </tbody>
+        </table>
+        
+    </div>
+    <div class="container" ng-controller="StockPriceController as spCtl">
+        <table class="table table-striped table-condensed">
+        <thead>
+            <tr>
+                <th>Company</th>
+                <th>Date</th>
+                <th>Close</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="row in spCtl.data">
+                <td>{{row.ticker}}</td>
+                <td>{{row.date}}</td>
+                <td>{{row.close}}</td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+    
+</body>
+</html>
