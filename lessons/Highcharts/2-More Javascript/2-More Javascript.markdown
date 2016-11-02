@@ -8,7 +8,7 @@
     // Inside the Controller
     
     self.currentTicker = '';
-    self.tickersList = [];
+    self.tickerList = [];
         
     ```
     
@@ -16,12 +16,12 @@
     // Inside the success callback, after data has been fetched
     // ... after self.data has been populated
     
-    self.tickersList = [];  // Clear it before we start
+    self.tickerList = [];  // Clear it before we start
     self.data.forEach(
         function (current) {  
             // Is current ticker in list? If not, add it
-            if (self.tickersList.indexOf(current.ticker) === -1) {
-                self.tickersList.push(current.ticker)
+            if (self.tickerList.indexOf(current.ticker) === -1) {
+                self.tickerList.push(current.ticker)
             }
         }
     );
@@ -38,7 +38,7 @@
     ```html
     <select ng-change="spCtl.onTickerSelect()" ng-model="spCtl.currentTicker">
         <option value="">-- ALL --</option>
-        <option ng-repeat="tick in spCtl.tickersList" value="{{tick}}">{{tick}}</option>
+        <option ng-repeat="tick in spCtl.tickerList" value="{{tick}}">{{tick}}</option>
     </select>
     ```
     
@@ -53,38 +53,38 @@
     
   - [ ] Modify the table to show only data of the selected ticker symbol
     
-    - Flesh out the `onChange` function to create a filtered copy of the array
+    - Flesh out the `onTickerSelect()` function to create a filtered copy of the array
     
-    ```js
-    // Remember to also declare
-    // self.filteredData = []
-    // ... previously in the Controller
-    
-    self.onTickerSelect = function() {
-        console.log("onTickerSelect()", self.currentTicker);
-        
-        if (self.currentTicker === '') {
-            self.filteredData = self.data;
-            return;
-        }
-        
-        self.filteredData = self.data.filter(
-            function (current) {
-                return current.ticker == self.currentTicker;
-                
-                // The above line is functionally the same as the following:
-                // if (current.ticker == self.currentTicker) {
-                //     return true;
-                // }
-                // return false;
-            }
-        );
-    }
+      ```js
+      // Remember to also declare
+      // self.filteredData = []
+      // ... previously in the Controller
+      
+      self.onTickerSelect = function() {
+          console.log("onTickerSelect()", self.currentTicker);
+          
+          if (self.currentTicker === '') {
+              self.filteredData = self.data;
+              return;
+          }
+          
+          self.filteredData = self.data.filter(
+              function (current) {
+                  return current.ticker == self.currentTicker;
+                  
+                  // The above line is functionally the same as the following:
+                  // if (current.ticker == self.currentTicker) {
+                  //     return true;
+                  // }
+                  // return false;
+              }
+          );
+      }
     ```
     
-    - The `[Array.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)`
-      function accepts a function that is run against each row. If the function
-      returns `true`, the row is kept in the returned result set. If it returns
+    - `[Array.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)`
+      accepts a function that is run against each row. If the function
+      returns `true`, the row is kept in the returned result set, while if it returns
       `false`, the row is discarded.
     
     - Change the model used to repeat the table to `filteredData`
@@ -97,7 +97,32 @@
       self.currentTicker = '';
       self.onTickerSelect();
       ```
-  
+    
+    - Side note: all of what we've accomplished here with filtering could have
+     been done using the `ngShow` directive. Indeed, that would have been 
+     simpler. However, the point of this piece was to demonstrate 
+     `Array.filter()` and `ngChange`. To use `ngShow` instead, remove the on 
+     change handler entirely, and provide the Boolean logic to show the row
+     (This method is not reflected in the "after" files):
+     
+     ```html
+     <select ng-model="spCtl.currentTicker">
+         <option value="">-- ALL --</option>
+         <option ng-repeat="tick in spCtl.tickerList" value="{{tick}}">{{tick}}</option>
+     </select>
+     
+     <!-- SNIP -->
+     
+     <tbody>
+         <tr ng-repeat="row in spCtl.data" ng-show="row.ticker == spCtl.currentTicker || spCtl.currentTicker == ''">
+             <td>{{row.ticker}}</td>
+             <td>{{row.date}}</td>
+             <td>{{row.close}}</td>
+         </tr>
+     </tbody>
+     ``` 
+    
+    
   - [ ] Now the hard part: displaying a chart. In order for the chart to be dynamic, the data structure must change structure. Currently the data looks like this:
         
         ```js
@@ -132,6 +157,8 @@
     - Call `buildChart()` in the web service success callback.
     
     - Test!
+    
+  - [ ] Many more steps, not covered here (sorry). Look at the (well-commented) code in `after/js/myTable.app.js`
     
     
     

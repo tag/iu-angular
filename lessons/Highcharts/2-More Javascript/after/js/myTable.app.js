@@ -9,7 +9,7 @@
         self.filteredData = [];
         
         self.currentTicker = '';
-        self.tickersList = [];
+        self.tickerList = [];
         
         $http.get('api/StockPrice.php')
         .then(
@@ -17,21 +17,22 @@
                 console.log("It worked!", response.data);
                 self.data = response.data;
                 
-                self.tickersList = [];  // Clear it before we start
+                self.currentTicker = '';
+                self.tickerList = [];  // Clear it before we start
                 self.data.forEach(
                     function (current) {  
-                        console.log(current);
+                        // console.log(current);
 
                         // Is current ticker in list? If not, add it
-                        if (self.tickersList.indexOf(current.ticker) === -1) {
-                            self.tickersList.push(current.ticker)
+                        if (self.tickerList.indexOf(current.ticker) === -1) {
+                            self.tickerList.push(current.ticker)
                         }
                     }
                 );
-                self.currentTicker = '';
+                
                 self.onTickerSelect();
                 
-                console.log("Tickers",  self.tickersList);
+                console.log("Tickers",  self.tickerList);
                 
                 self.buildChart();            
             },
@@ -42,43 +43,107 @@
         
         self.onTickerSelect = function() {
             console.log("onTickerSelect()", self.currentTicker);
-            
+
             if (self.currentTicker === '') {
                 self.filteredData = self.data;
-                return;
+            } else {
+                self.filteredData = self.data.filter(
+                    function (current) {
+                        return current.ticker == self.currentTicker;
+
+                        // The above line is functionally the same as the following:
+                        // if (current.ticker == self.currentTicker) {
+                        //     return true;
+                        // }
+                        // return false;
+                    }
+                );
             }
-            
-            self.filteredData = self.data.filter(
-                function (current) {
-                    return current.ticker == self.currentTicker;
-                    
-                    // The above line is functionally the same as the following:
-                    // if (current.ticker == self.currentTicker) {
-                    //     return true;
-                    // }
-                    // return false;
-                }
-            );
+            self.buildChart();
         };
         
         self.buildChart = function () {
+            // In a "real" app, we might do this differently, precalculting and caching the conversion from `data`  to `series`
+            //
+            // We do dates differently than the previous page, partly because dates are repeated across ticker symbols,
+            // and partly because this page uses the 'datetime' data type in Highcharts. (In order to do this, I added
+            // a parseDate method to convert the JSON date to a Javascript Date object,)
+            //
             
-            // We have to do dates differently than the previous page, because dates are repeated.
-            
-            var theDates = [];
-            
+            // How the data will be restructured:
+            // e.g., { "GOOG": {"close": [ [2016-09-01, 55], ... ], "open": [...]}, ...}
+            // ... and each of the close/open/etc arrays will be arrays of 
+            // [date, value], where date is a valid Javascript `Date` object.
             var series = {};
             
             self.data.forEach(function(current) {
-                if (theDates.indexOf(current.date) == -1) {
-                    // unshift (add to front) instead of push (add to back) , so we don't have to sort later
-                    theDates.unshift(current.date);
+                if (series[current.ticker] === undefined) {
+                    series[current.ticker] = {open:[], close:[], high:[], low:[], range: [], openclose: []};
                 }
-                    
+                
+                var date = parseDate(current.date);
+
+                // Use `unshift` (add to front) instead of `push` (add to end) to keep data sorted
+                // series[current.ticker].open.unshift ( [date, Number(current.open )] );
+                series[current.ticker].close.unshift( [date, Number(current.close)] );
+                // series[current.ticker].high.unshift ( [date, Number(current.high )] );
+                // series[current.ticker].low.unshift  ( [date, Number(current.low  )] );
+                
+                
+                // Made low–high a range series, rather than a line.
+                series[current.ticker].range.unshift( [date, Number(current.low), Number(current.high)] );
+                series[current.ticker].openclose.unshift( [date, Number(current.open), Number(current.close)] );
+
             });
             
+            // DEBUG (if necessary)
+            // console.log("series",series);
             
-                
+            // `series` holds the transformed structure, while `seriesData` uses the
+            // transformed structure to format the data better for Highcharts.
+            // Think of `series` as an interim step in the transformation. It's
+            // usefule because this function actually displays different kinds of 
+            // charts, depending on the valud of self.currentTicker
+            
+            var seriesData = [];
+            
+            if (self.currentTicker == '') { // chart all
+                seriesData = Object.keys(series).map(function(curr) {
+                    return {
+                        name: curr,
+                        data: series[curr].close
+                    }; 
+                });
+            } else { // chart a single stock
+                console.log(Highcharts.getOptions().colors[0]);
+                seriesData = [
+                    {
+                        name: 'Close',
+                        type: 'spline',  // curved, rather than straight line
+                        data: series[self.currentTicker].close
+                    },
+                    {
+                        name: 'Daily Range',
+                        type: 'arearange', // arearange requires highcharts-more.js file as well.
+                        data: series[self.currentTicker].range,
+                        color: Highcharts.getOptions().colors[0],
+                        fillOpacity: 0.2,
+                        lineWidth: 0,
+                        zIndex: 0   // moves the range to the back, so the other values can be selected.
+                    },
+                    {
+                        name: 'Open/Close',
+                        type: 'columnrange', // arearange requires highcharts-more.js file as well.
+                        data: series[self.currentTicker].openclose,
+                        color: 'rgba(124,181,236,.4)',
+                        borderWidth: 0,
+                        zIndex: 0
+                    }
+                ];
+            }
+            
+            console.log(seriesData);
+            
             Highcharts.chart('myChart', {
                     title: {
                         text: 'Stock Prices',
@@ -87,11 +152,17 @@
                         text: 'Pretty Subtitle',
                     },
                     xAxis: {
-                        categories: theDates
+                        type: 'datetime', // Note we've changed the type, instead of using categories
+                        dateTimeLabelFormats: {
+                            day: '%m/%d/%y'
+                        },
+                        minTickInterval: 24 * 3600 * 1000 // one day, expressed in milliseconds;
+                                                          // without this, Highcharts sets its own, 
+                                                          // which could be on the hourly level
                     },
                     yAxis: {
                         title: {
-                            text: 'Prices'
+                            text: 'Price'
                         },
                         plotLines: [{
                             value: 0,
@@ -100,7 +171,9 @@
                         }]
                     },
                     tooltip: {
-                        valuePrefix: '$'
+                        valuePrefix: '$',
+                        shared: true,
+                        crosshairs: true
                     },
                     legend: {
                         layout: 'vertical',
@@ -108,20 +181,16 @@
                         verticalAlign: 'middle',
                         borderWidth: 0
                     },
-                    series: [{
-                        name: 'Tokyo',
-                        data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-                    }, {
-                        name: 'New York',
-                        data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
-                    }, {
-                        name: 'Berlin',
-                        data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
-                    }, {
-                        name: 'London',
-                        data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-                    }]
+                    series: seriesData
                 });  
         }
     });
 })();
+
+
+// parse a date in yyyy-mm-dd format
+function parseDate(input) {
+  var parts = input.split('-');
+  // new Date(year, month [, day [, hours[, minutes[, seconds[, ms]]]]])
+  return Date.UTC(parts[0], parts[1]-1, parts[2]); // Note: months are 0-based
+}

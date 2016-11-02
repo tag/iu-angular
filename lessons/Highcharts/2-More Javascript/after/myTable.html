@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/site.css">
     <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
     <script type="text/javascript" src="js/myTable.app.js"></script>
 </head>
@@ -37,9 +38,10 @@
     
     <div class="container" ng-controller="StockPriceController as spCtl">
         
-        <select ng-change="spCtl.onTickerSelect()" ng-model="spCtl.currentTicker">
+        <select ng-model="spCtl.currentTicker"
+                ng-change="spCtl.onTickerSelect()">
             <option value="">-- ALL --</option>
-            <option ng-repeat="tick in spCtl.tickersList" value="{{tick}}">{{tick}}</option>
+            <option ng-repeat="tick in spCtl.tickerList" value="{{tick}}">{{tick}}</option>
         </select>
         
         <div id="myChart"></div>

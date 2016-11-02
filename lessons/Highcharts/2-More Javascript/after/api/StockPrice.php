@@ -3,7 +3,7 @@ require('../app/environment.php');
 
 $db = new PDO(DB_CONNECT, DB_USER, DB_PASSWORD); 
 
-$statement = $db->prepare('SELECT * FROM StockPrice ORDER BY date DESC LIMIT 10'); // Warning: This returns *many* rows without the LIMIT!
+$statement = $db->prepare('SELECT * FROM StockPrice ORDER BY date DESC LIMIT 20'); // Warning: This returns *many* rows without the LIMIT!
 $success = $statement->execute();
 
 if (!$success) {
