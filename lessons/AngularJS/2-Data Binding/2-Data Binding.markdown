@@ -8,8 +8,8 @@
   
   - [ ] Create a new controller, and copy the JSON data from `sampleData.json`, 
         apply it to the controller.
-        
-        - Tip: To understand key word `this`, read [http://javascriptissexy.com/understand-javascripts-this-with-clarity-and-master-it/](http://javascriptissexy.com/understand-javascripts-this-with-clarity-and-master-it/)
+     
+     - Tip: To understand key word `this`, read [http://javascriptissexy.com/understand-javascripts-this-with-clarity-and-master-it/](http://javascriptissexy.com/understand-javascripts-this-with-clarity-and-master-it/)
   
     ```js
     app.controller('TickerController', function(){

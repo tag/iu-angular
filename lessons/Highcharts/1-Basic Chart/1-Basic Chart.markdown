@@ -132,7 +132,7 @@
       2. Adjust our data locally.
   
   - [ ] One tool we can use in Javascript is the 
-        `[Array.map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) function`.
+        [`Array.map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) function.
         
     ```js
     var ticker = self.data[0].ticker;
