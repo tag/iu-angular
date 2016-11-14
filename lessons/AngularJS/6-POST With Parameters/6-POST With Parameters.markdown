@@ -49,7 +49,7 @@
       from the `after` folder, but they need to add the following code:
     
       ```php
-      // FILE: php-app/environment.php
+      // FILE: app/environment.php
     
       if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           $contentTypes = explode(';', $_SERVER['CONTENT_TYPE']); //parse content_type headers
@@ -75,7 +75,7 @@
   - [ ] Read in the POST data, and create a StockPrice object
 
     ```php
-    // FILE: php-app/MasterTool/create.php
+    // FILE: api/MasterTool/create.php
     
     $obj = new StockPrice (
         $_POST['ticker'],
@@ -99,7 +99,7 @@
   - [ ] Open a db connection, and prepare the SQL
   
     ```php
-    // FILE: php-app/StockPrice/create.php
+    // FILE: api/StockPrice/create.php
     
     $db = new PDO(DB_CONNECT, DB_USER, DB_PASSWORD);
     
@@ -131,7 +131,7 @@
   - [ ] Handle the query results
   
     ```php
-    // FILE: php-app/StockPrice/create.php
+    // FILE: api/StockPrice/create.php
     
     if (!$success) { // If something went wrong with our db statement
         header("HTTP/1.1 500 Error");
