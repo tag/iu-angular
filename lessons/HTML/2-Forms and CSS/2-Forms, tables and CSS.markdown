@@ -1,6 +1,6 @@
 # Forms, Tables, and CSS
 
-##Forms
+## Forms
 
   - [ ] REVIEW: Create a new HTML page, called `myForm.html`
   
@@ -8,9 +8,9 @@
   
   - [ ] Add a `DOCTYPE` to the top of all HTML files
   
-  ```html
-  <!DOCTYPE html>
-  ```
+    ```html
+    <!DOCTYPE html>
+    ```
   - [ ] Add form and input: 
 
     ```html
@@ -37,7 +37,7 @@
     
   - [ ] EXERCISE: Build a form that submits to our dynamic API.
   
-  ```html
+     ```html
       <form action="api/StockPrice/byDate.php" method="get">
       <p>
           <label for="ticker">Ticker:</label>
@@ -49,7 +49,7 @@
       </p>
          <input type="submit" value="Go!"> 
       </form>
-  ```
+     ```
   
   
 ## Tables
@@ -80,7 +80,7 @@
     </table>
   ```
 
-##CSS
+## CSS
 
   - [ ] CSS is a way to separate concerns. Three places to put style information
     
@@ -90,45 +90,45 @@
 
   - [ ] Change font of all content in the file
 
-  ```css
+    ```css
     body {
         font-family: sans-serif;
     }
-  ```
+    ```
 
   - [ ] `font-family` can accept a list of fonts, and searches until one is found
-  ```css
+    ```css
     body {
         font-family: Helvetica, Arial, sans-serif;
     }
-  ```
+    ```
   
   - [ ] Change `<h1>` to display a different color and font size.
       
     - When specifying `color`, it's good practice to also specify `background-color`.
 
-  ```css
+    ```css
     h1 {
         color: royalblue;
         background-color: white;
         font-size: 18px;
     }
-  ```
+    ```
 
   - [ ] [Box model](http://www.w3schools.com/css/css_boxmodel.asp) (IMPORTANT!)
   
   - [ ] Identify elements by tag, by class (leading period), or by id (hash).
   
-  ```css
-  .content {
-      color: royalblue;
-      padding:  10px 10px 10px 10px;
-  }
-
-  #main {
-        margin: 10px 10px;
-        border: 2px solid purple;
-        padding: 10px 20px 10px 20px;
-  }
-  ```
+    ```css
+    .content {
+        color: royalblue;
+        padding:  10px 10px 10px 10px;
+    }
+  
+    #main {
+          margin: 10px 10px;
+          border: 2px solid purple;
+          padding: 10px 20px 10px 20px;
+    }
+    ```
  
