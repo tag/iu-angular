@@ -1,5 +1,35 @@
 # Forms, Tables, and CSS
 
+## Tables
+
+  - [ ] Explain `<table>`, and associated tags: `<thead>`, `<tbody>`, `<tr>`, `<th>`, `<td>`.
+      
+  ```html
+    <table>
+        <thead>
+            <tr>
+                <th>Stock</th>
+                <th>Price</th>
+                <th>Market Cap</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>DISN</td>
+                <td>92.8</td>
+                <td>151.0 B</td>
+            </tr>
+            <tr>
+                <td>TWTR</td>
+                <td>23.05</td>
+                <td>$16.3 B</td>
+            </tr>
+        </tbody>
+    </table>
+  ```
+  
+  - [ ] Remember, use `<table>` tags to impart meaning to data, not for layout or design purposes.
+  
 ## Forms
 
   - [ ] REVIEW: Create a new HTML page, called `myForm.html`
@@ -35,7 +65,7 @@
     
 [INPUT_TYPES]:https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input
     
-  - [ ] EXERCISE: Build a form that submits to our dynamic API.
+  - [ ] EXERCISE: Build a form that submits to a given URL. (We'll build the endpoint later.)
   
      ```html
       <form action="api/StockPrice/byDate.php" method="get">
@@ -50,35 +80,6 @@
          <input type="submit" value="Go!"> 
       </form>
      ```
-  
-  
-## Tables
-
-  - [ ] Explain `<table>`, and associated tags: `<thead>`, `<tbody>`, `<tr>`, `<th>`, `<td>`.
-      
-  ```html
-    <table>
-        <thead>
-            <tr>
-                <th>Stock</th>
-                <th>Price</th>
-                <th>Market Cap</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>DISN</td>
-                <td>92.8</td>
-                <td>151.0 B</td>
-            </tr>
-            <tr>
-                <td>TWTR</td>
-                <td>23.05</td>
-                <td>$16.3 B</td>
-            </tr>
-        </tbody>
-    </table>
-  ```
 
 ## CSS
 
