@@ -112,7 +112,9 @@
     
   - [ ] Create a new div in `index.html`, wire it to `AppController`, and test 
     
+    ```html
        <div ng-controller="AppController as AppCtrl">
-            <h3>{{ AppCtrl.name + "(" + AppCtrl.ticker + ")"}}</h3>
+            <h3>{{ AppCtrl.name }} ({{AppCtrl.ticker}})</h3>
             <p>{{ AppCtrl.location }}</p>
         </div>
+    ```
