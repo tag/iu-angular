@@ -1,4 +1,4 @@
-#2 - Data Binding
+# 2 - Data Binding
 
   - [ ] Review: We created the app, and created the controller in `index.app.js`
   
@@ -36,7 +36,7 @@
             <strong>Date:</strong> {{tkCtrl.tickerData[0].date}} <br>
             <strong>Close:</strong> {{tkCtrl.tickerData[0].close}}
          </div>
-         <!--- etc, etc. --->
+         <!-- etc, etc. -->
      </div>
      ```
 
