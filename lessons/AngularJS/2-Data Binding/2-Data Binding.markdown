@@ -6,7 +6,7 @@
   
   - [ ] Review: We used the double curly brace (mustache) in our HTML file to display data in our tempalate
   
-  - [ ] Create a new controller, and copy the JSON data from `sampleData.json`, 
+  - [ ] Create a new controller, and copy the JSON data from `sampleData.json`,
         apply it to the controller.
      
      - Tip: To understand key word `this`, read [http://javascriptissexy.com/understand-javascripts-this-with-clarity-and-master-it/](http://javascriptissexy.com/understand-javascripts-this-with-clarity-and-master-it/)
@@ -96,8 +96,3 @@
         </table>
     </div>
     ```
-    
-
-    
-
-	
