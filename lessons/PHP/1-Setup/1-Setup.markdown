@@ -35,10 +35,17 @@
     ```
 
 ## Test PHP
-  - [ ] Create a phpinfo page to make sure everything is working. Call it `info.php`
+
+  - [ ] Create a `phpinfo()` page to make sure everything is working. Call it `info.php`
   
   ```php
   <?php
   phpinfo();
   ```
   - Show [php.net](http://php.net/docs.php) as a good source for documentation
+  
+## Load data to MySQL
+
+  - [ ] Load one of the two SQL files:
+      * `stock-ticker.sql` (old stock data)
+      * Or, `stock-ticker-csv.sql` and the associated `stock-2015-2017.csv` file.
