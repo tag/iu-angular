@@ -1,4 +1,4 @@
-#3 - Two-Way Data Binding
+# 3 - Two-Way Data Binding
 
   - [ ] Exercise: Build a form necessary to add a new row
   
