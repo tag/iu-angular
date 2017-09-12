@@ -29,7 +29,7 @@
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-        ```
+    ```
 
   - [ ] Add new data fields to controller in `index.app.js`
 
