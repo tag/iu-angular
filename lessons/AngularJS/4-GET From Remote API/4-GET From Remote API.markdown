@@ -1,11 +1,11 @@
-#4-Simple GET From Remote API
+# 4-Simple GET From Remote API
 
-  - [ ] To begin, we will need files from prevoius lessons. These are all collected in a `before.zip` file
+  - [ ] (2016: Needs updating) To begin, we will need files from prevoius lessons. These are all collected in a `before.zip` file
     
     - `api/StockPrice/byDate.php` from PHP lesson #5 (and the supporting PHP files)
     - `myTable.html` from HTML lesson 3
     
-  - [ ] Review the functionality of the form in `api/StockPrice.php`
+  - [ ] (2016: Needs updating) Review the functionality of the form in `api/StockPrice.php`
 
     - Returns a subset of stock data, in JSON format
   
@@ -15,14 +15,9 @@
     2. Load your local application Javascript file
     3. Add `ng-app` directive to an element on the HTML page (often, `<body>`)
     4. Add `ng-controller` directive to an element on the HTML page
+    
+  - Your code might look something like this:
   
-  - [ ] Exercise: create a new application/controller AngularJS file for `myTable.html`
-    
-    - Create a table that prints stock data, much like we did in `index.html`
-    - Mostly, this is a copy/paste from `index.app.js`
-    - Name the new Angular application file `myTable.app.js`
-    - An empty app & controller might look like this:
-    
     ```js
     (function(){
         'use strict';
@@ -58,7 +53,7 @@
       call the promise's `then()` method:
       
     ```js
-    $http.get('api/StockPrice.php')
+    $http.get(url)
     .then(
         function successCallback(response) {
             // ...
@@ -75,13 +70,14 @@
       
   - [ ] Inside the success callback, set the response body to the controller's
     `data` variable. Angular's binding magic takes care of the rest.
-    
+      
     ```js
     app.controller("StockPriceController", function($http) {
         var self = this;
         self.data = [];
     
-        $http.get('api/StockPrice.php')
+        var url = 'api/StockPrice.php';
+        $http.get(url)
         .then(
             function successCallback(response) {
                 console.log("It worked!", response.data);
@@ -93,4 +89,16 @@
         );
     });
     ```
+    
+    If the API isn't built yet on the local machine, we can try to grab the data 
+    [directly from this GitHub repo](https://raw.githubusercontent.com/tag/iu-angular/master/lessons/AngularJS/4-GET%20From%20Remote%20API/ticker.json) (we'll pretend it's a dynamic web service).
+    
+    ```js
+    var url = 'https://raw.githubusercontent.com/tag/iu-angular/master/lessons/AngularJS/4-GET%20From%20Remote%20API/ticker.json';
+    ```
+    
+  - [ ] EXERCISE: Create a new page. Connect to a public API, and present the data. Some suggested APIs:
+  
+    * Chuck Norris Jokes: [API](https://api.chucknorris.io/jokes/random)
+    * [Random cat pictures](http://thecatapi.com): [API](http://thecatapi.com/api/images/get?format=src)
     
