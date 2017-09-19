@@ -4,7 +4,7 @@
   - [ ] Create `api/MasterTool.php`
   - [ ] Begin with straight JSON dummy output, no PHP processing:
 
-    ````js
+    ```js
     [{
         "stock": "MSFT",
         "date": "2016-09-16",
@@ -27,10 +27,10 @@
       it can cause hard-to-track bugs (like outputting content before sending
       headers.)
 
-  - [ ] Explain [variables][http://php.net/manual/en/language.variables.basics.php],
+  - [ ] Explain [variables](http://php.net/manual/en/language.variables.basics.php),
     e.g., `$var`
 
-  - [ ] Create an [array][http://php.net/manual/en/language.types.array.php]:
+  - [ ] Create an [array](http://php.net/manual/en/language.types.array.php):
     `array('key'=>'value')`
 
     - We call these "arrays" (more specifically, "associative arrays"), but 
@@ -41,12 +41,12 @@
 
   - [ ] Output data with `echo`
 
-    - Strings can use single quotes '' or double quotes "". The parser will 
+    - Strings can use single quotes `' '` or double quotes `" "`. The parser will 
       accept escape sequences (`\t\n`) and will try to expand variables within double 
       quotes, but will only process the escaped single quite within single 
-      quotes. For more information, see the [string][PHP_STRING] type documentation.
+      quotes. For more information, see the [string type](http://php.net/manual/en/language.types.string.php) documentation.
     
-    - Concatenate strings with a `.`
+    - Concatenate strings with `.`
 
     ```php
     <?php
@@ -94,7 +94,7 @@
 
     - **TEST by reloading the page**
     
-FINAL: `api\StockPrice.php`
+FINAL: `api\stockPrice.php`
 ---------------------------
 
 ```php
