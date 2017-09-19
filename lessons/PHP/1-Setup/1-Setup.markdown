@@ -32,20 +32,26 @@
 	  |     |- angular-1.5.7.js  (etc., etc.)
       |  +- app (angular js app files go here)
       |- index.html
-    ```
+  ```
 
 ## Test PHP
 
-  - [ ] Create a `phpinfo()` page to make sure everything is working. Call it `info.php`
+  - [ ] Create a `phpinfo()` page to make sure everything is working. Call it `info.php`.
   
   ```php
   <?php
   phpinfo();
   ```
-  - Show [php.net](http://php.net/docs.php) as a good source for documentation
+  - [ ] Show [php.net](http://php.net/docs.php) as a good source for documentation
+  
+  - [ ] PHP allows a mix between static and dynamic content in the same file. However, this is poor practice. PHP files begin with `<?php`. Some resources will tell you to close your PHP tags (`?>`). Don't. As we will never mix PHP with static content, we don't need to. Also, closeing your tags can lead to hard to find errors in bigger applications.
+  
   
 ## Load data to MySQL
 
   - [ ] Load one of the two SQL files:
+      
       * `stock-ticker.sql` (old stock data)
       * Or, `stock-ticker-csv.sql` and the associated `stock-2015-2017.csv` file.
+      
+      There are directions in Canvas to help you do this.
