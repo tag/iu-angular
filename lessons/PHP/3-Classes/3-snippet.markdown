@@ -1,4 +1,4 @@
-# 3. Classes 
+# 3. Classes
 
 - [ ] Explain model objects (a representation of what we will be returning); mention MVC pattern
 

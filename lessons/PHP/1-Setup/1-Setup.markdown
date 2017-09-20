@@ -17,14 +17,14 @@
 
   - [ ] Create folders for project (inside personal "playground" folder)
   - [ ] Create `api` folder, for PHP endpoints
-  - [ ] Create `app` folder, for PHP support files
+  - [ ] Create `php` folder, for PHP support files (you might see this called "app" in many environments)
   - [ ] Show [php.net](http://php.net/docs.php) as a good source for documentation
   
   ```
     # File structure should look something like this:
     
     [root/play]
-      +- app   (php app specific files; will be private)
+      +- php   (php app specific files; will be private)
       +- api   (php api endpoints files)
       +- css   (folder)
       +- js    (folder, holds js lib files)
@@ -52,6 +52,6 @@
   - [ ] Load one of the two SQL files:
       
       * `stock-ticker.sql` (old stock data)
-      * Or, `stock-ticker-csv.sql` and the associated `stock-2015-2017.csv` file.
+      * Or, `stock-ticker-csv.sql` and the associated `stock-2015-2017.csv` file (preferred)
       
       There are directions in Canvas to help you do this.

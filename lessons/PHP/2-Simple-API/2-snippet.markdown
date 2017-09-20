@@ -1,7 +1,7 @@
 
-# 2. Simple api file with dummy data 
+# 2. Simple api file with dummy data
 
-  - [ ] Create `api/MasterTool.php`
+  - [ ] Create `api/stockPrice.php`
   - [ ] Begin with straight JSON dummy output, no PHP processing:
 
     ```js
@@ -33,7 +33,7 @@
   - [ ] Create an [array](http://php.net/manual/en/language.types.array.php):
     `array('key'=>'value')`
 
-    - We call these "arrays" (more specifically, "associative arrays"), but 
+    - We call these "arrays" (more specifically, "associative arrays"), but
       when we specify textual keys, these are similar to Javascript objects.
       If we use only numeric keys, they behave like Javascript arrays.
 
@@ -41,9 +41,9 @@
 
   - [ ] Output data with `echo`
 
-    - Strings can use single quotes `' '` or double quotes `" "`. The parser will 
-      accept escape sequences (`\t\n`) and will try to expand variables within double 
-      quotes, but will only process the escaped single quite within single 
+    - Strings can use single quotes `' '` or double quotes `" "`. The parser will
+      accept escape sequences (`\t\n`) and will try to expand variables within double
+      quotes, but will only process the escaped single quite within single
       quotes. For more information, see the [string type](http://php.net/manual/en/language.types.string.php) documentation.
     
     - Concatenate strings with `.`
@@ -76,59 +76,20 @@
 	<?php
 
 	$stock = array(
-	    'ticker'   => 'AAPL',             
-	    'date'     => '2016-09-16',           
+	    'ticker'   => 'AAPL',
+	    'date'     => '2016-09-16',
 	    'open'     => 115.120003,
-	    'high'     => 116.129997,             
+	    'high'     => 116.129997,
 	    'low'      => 114.040001,
 		'close'    => 114.919998,
 		'volume'   => 79677200,
-		'adjClose' => 114.919998        
+		'adjClose' => 114.919998
 	);
 
 	echo json_encode($stock);
-
 	````
 
   - [ ] Create another stock array. Push both stocks onto an aggregating array with `array_push()`
-
-    - **TEST by reloading the page**
     
-FINAL: `api\stockPrice.php`
----------------------------
+    - **TEST by reloading the page**
 
-```php
-<?php
-
-$stock = array(
-    'ticker'   => 'AAPL',             
-    'date'     => '2016-09-16',           
-    'open'     => 115.120003,
-    'high'     => 116.129997,             
-    'low'      => 114.040001,
-	'close'    => 114.919998,
-	'volume'   => 79677200,
-	'adjClose' => 114.919998        
-);
-
-$stockToo =  array(
-    'ticker'   => 'MSFT',             
-    'date'     => '2016-09-16',           
-    'open'     => 57.630001,
-    'high'     => 57.630001,             
-    'low'      => 56.75,
-	'close'    => 57.25,
-	'volume'   => 44493500,
-	'adjClose' => 57.25        
-);
-
-$stockToo['open'] = 65.0;
-
-$arr = array();
-
-array_push($arr, $stock);
-array_push($arr, $stockToo);
-
-echo json_encode($arr);
-
-````
