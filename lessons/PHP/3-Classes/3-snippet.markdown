@@ -104,17 +104,17 @@
   
   ```
 
-  - [ ] When inside class methods, access members with `$this->varName`
-    (NOT `$this->$varName`)
+- [ ] When inside class methods, access members with `$this->varName`
+  (NOT `$this->$varName`)
     
-  - [ ] Methods look much like they do in Javascript. Our models won't need
-    many methods other than the constructor.
+- [ ] Methods look much like they do in Javascript. Our models won't need
+  many methods other than the constructor.
     
-  - [ ] Constructors in PHP have a special name: `__construct()`.
+- [ ] Constructors in PHP have a special name: `__construct()`.
 
-    - Methods that start with double underscore are reserved by PHP
+  - Methods that start with double underscore are reserved by PHP
 
-    - We can give the constructor parameters, just as we can any other method.
+  - We can give the constructor parameters, just as we can any other method.
     
       ```php
       class StockPrice
@@ -134,10 +134,10 @@
       }
       ```
 
-    - Instead of overloading (like Java, or C), methods may have optional 
-	  parameters. When a parameter is declared optional, assign it a default value
-	  in the parameter list. All further parameters of theat method must then have 
-	  default values.
+  - Instead of overloading (like Java, or C), methods may have optional 
+    parameters. When a parameter is declared optional, assign it a default value
+    in the parameter list. All further parameters of theat method must then have 
+    default values.
     
       ```php
       class StockPrice
@@ -157,7 +157,7 @@
       }
       ```
 
-  - [ ] Let's test our model with some dummy data. We will modify `api/StockPrice.php`
+- [ ] Let's test our model with some dummy data. We will modify `api/StockPrice.php`
     to use our new Model object.
     
     - We'll need to add a `require` statement, so PHP knows where our class
@@ -204,8 +204,8 @@
     echo json_encode($arr);
     ```
     
-  - [ ] Instead of handling the dependencies in each class, let's do it once in
-    a common file. Create `app/environment.php`, and add the following:
+- [ ] Instead of handling the dependencies in each class, let's do it once in
+  a common file. Create `app/environment.php`, and add the following:
     
       ```php
       <?php      // app/environment.php
