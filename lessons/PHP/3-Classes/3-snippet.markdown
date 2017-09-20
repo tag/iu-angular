@@ -67,7 +67,7 @@
       attribute names), not necessarily the names the db is using. Our model
       attribute namaes and our Javascript attribute names **MUST** match.
     
-- [ ] EXCERCISE: Add the remaining attributes of `StockPrice`: 
+- [ ] EXCERCISE: Add the remaining attributes of `StockPrice`:
   `$high`, `$low`, `$close `$volume`, and `$adjClose`.
 
   ```php
@@ -106,57 +106,91 @@
 
 - [ ] When inside class methods, access members with `$this->varName`
   (NOT `$this->$varName`)
-    
+  
 - [ ] Methods look much like they do in Javascript. Our models won't need
   many methods other than the constructor.
-    
+  
 - [ ] Constructors in PHP have a special name: `__construct()`.
 
   - Methods that start with double underscore are reserved by PHP
 
   - We can give the constructor parameters, just as we can any other method.
     
-      ```php
-      class StockPrice
-      {
-          // ** SNIP **
-     
-          public function __construct($ticker, $date, $open, $high, $low, $volume, $close, $adjClose) {
-              $this->ticker = $ticker;
-              $this->date   = $date;
-              $this->open   = $open;
-              $this->high   = $high;
-              $this->low    = $low;
-              $this->volume = $volume;
-              $this->close  = $close;
-              $this->adjClose = $adjClose;
-          }
-      }
-      ```
+    ```php
+    class StockPrice
+    {
+        // ** SNIP **
+   
+        public function __construct($ticker, $date, $open, $high, $low, $volume, $close, $adjClose) {
+            $this->ticker = $ticker;
+            $this->date   = $date;
+            $this->open   = $open;
+            $this->high   = $high;
+            $this->low    = $low;
+            $this->volume = $volume;
+            $this->close  = $close;
+            $this->adjClose = $adjClose;
+        }
+    }
+    ```
 
-  - Instead of overloading (like Java, or C), methods may have optional 
+  - (SKIP) Instead of overloading (like Java, or C), methods may have optional
     parameters. When a parameter is declared optional, assign it a default value
-    in the parameter list. All further parameters of theat method must then have 
+    in the parameter list. All further parameters of theat method must then have
     default values.
     
-      ```php
-      class StockPrice
-      {
-          // ** SNIP **
-      
-          public function __construct($ticker, $date, $open, $high, $low, $volume, $close = null, $adjClose = null) {
-              $this->ticker = $ticker;
-              $this->date   = $date;
-              $this->open   = $open;
-              $this->high   = $high;
-              $this->low    = $low;
-              $this->volume = $volume;
-              $this->close  = $close;
-              $this->adjClose = $adjClose;
-          }
-      }
-      ```
-
+    ```php
+    class StockPrice
+    {
+        // ** SNIP **
+    
+        public function __construct($ticker, $date, $open, $high, $low, $volume, $close = null, $adjClose = null) {
+            $this->ticker = $ticker;
+            $this->date   = $date;
+            $this->open   = $open;
+            $this->high   = $high;
+            $this->low    = $low;
+            $this->volume = $volume;
+            $this->close  = $close;
+            $this->adjClose = $adjClose;
+        }
+    }
+    ```
+  
+  - Having this many parameters to a constructor is messy. It's common (especially in Javascript) to just pass
+    in an associative array of values.
+    
+    Notice how in this example, we also use the constructor to force types for the numeric attributes with [`floatval()`](http://php.net/manual/en/function.floatval.php)
+    
+    ```php
+    public function __construct($data) {
+        $this->ticker = $data['ticker'];
+        $this->date   = $data['date'];
+        $this->open   = floatval($data['open']);
+        $this->high   = floatval($data['high']);
+        $this->low    = floatval($data['low']);
+        $this->volume = floatval($data['volume']);
+        $this->close  = floatval($data['close']);
+        $this->adjClose = floatval($data['adjClose']);
+    }
+    ```
+  
+  - Currently if any field isn't provided in the input array, this will error. What if we wanted `'close'` and `'adjClose'` to be optional? Use the `isset()` method, and the ternary "if" operator:
+    
+    ```php
+    public function __construct($data) {
+        $this->ticker = $data['ticker'];
+        $this->date   = $data['date'];
+        $this->open   = floatval($data['open']);
+        $this->high   = floatval($data['high']);
+        $this->low    = floatval($data['low']);
+        $this->volume = floatval($data['volume']);
+    
+        $this->close  = isset($data['close']) ? floatval($data['close']) : null;
+        $this->adjClose = isset($data['close']) ? floatval($data['adjClose']) : null;
+    }
+    ```
+  
 - [ ] Let's test our model with some dummy data. We will modify `api/StockPrice.php`
     to use our new Model object.
     
@@ -168,32 +202,35 @@
     - Change a value in one of the instances.
 
     ```php
-    <?php      // api/StockPrice.php
+    <?php      // We are in api/StockPrice.php
     
-    require '../app/Model/StockPrice.php';
+    require '../php/Model/StockPrice.php';
     
     $arr = array();
     
     $stock = new StockPrice(
-        'MSFT',
-		'2016-09-16',
-		57.630001,   // open
-		57.630001,   // high
-		56.75,       // low
-		44493500,    // volume
-		57.25,       // close
-		57.25        // adjClose
+        [
+            'ticker' => 'AAPL',
+            'date'   => '2016-09-16',
+            'open'   => '115.120003',
+            'high'   => '116.129997',
+            'low'    => '114.040001',
+            'volume' => '79677200',
+            'close'  => '114.919998',
+            'adjClose' => '114.919998'
+        ]
     );
 
-    $stockToo = new StockPrice(
-        'AAPL',             
-        '2016-09-16',           
-        115.120003,   // open
-        116.129997,   // high            
-        114.040001,   // low
-	    79677200,     // volume
-		114.919998,   // close
-	    114.919998    // adjClose      
+    $stockToo =  new StockPrice(
+        [
+            'ticker' => 'MSFT',
+            'date'   => '2016-09-16',
+            'open'   => '57.630001',
+            'high'   => '57.630001',
+            'low'    => '56.75',
+            'volume' => '44493500'
+            // Let's leave out 'close' and 'adjClose' to test whether our optionality for these fields works.
+        ]
     );
     
     $stockToo->open = 65.0;
@@ -221,7 +258,8 @@
       ```
     
     - The "magic constant" `__DIR__` is always equal to the current directory
-      of the current file.
+      of the current file. The `set_include_path()` method tells PHP to start looking
+      from the directory our environment file is in.
     
     - In `api/StockPrice.php`, add the following at the top of the file
       (instead of our previous `require` statement):

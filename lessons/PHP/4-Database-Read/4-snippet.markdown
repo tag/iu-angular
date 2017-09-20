@@ -29,7 +29,7 @@
       `php-app/environment.php`:
     
       ```php
-      define('DB_CONNECT',  'mysql:host=localhost;dbname=FieldEngineer');
+      define('DB_CONNECT',  'mysql:host=localhost;dbname=team8db');
       define('DB_USER',     'root');
       define('DB_PASSWORD', '');
       ```
@@ -105,16 +105,7 @@
   
   $arr = array();
   while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-  	$stock =  new StockPrice(
-  	    $row['ticker'],
-  		$row['date'],
-  		$row['open'],
-  		$row['high'],
-  		$row['low'],
-  		$row['volume'],
-  		$row['close'],
-  		$row['adjClose']
-  	);
+      $stock =  new StockPrice($row);
       array_push($arr, $stock);
   }
   
@@ -132,59 +123,3 @@
       them arrays in PHP.
     
   - [ ] Test whether it works.
-
-FINAL: `api/MasterTool.php`
----------------------------
-```php
-<?php
-require('../app/environment.php');
-
-$db = new PDO(DB_CONNECT, DB_USER, DB_PASSWORD); 
-
-$statement = $db->prepare('SELECT * FROM StockPrice LIMIT 1'); // Warning: This returns *many* rows without the LIMIT!
-$success = $statement->execute();
-
-if (!$success) {
-    header("HTTP/1.1 500 Error");
-    var_dump($statement->errorInfo());
-    exit ('Bad SQL');
-}
-
-$arr = array();
-while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-
-	$stock =  new StockPrice(
-	    $row['ticker'],
-		$row['date'],
-		$row['open'],
-		$row['high'],
-		$row['low'],
-		$row['volume'],
-		$row['close'],
-		$row['adjClose']
-	);
-	
-    array_push($arr, $stock);
-}
-
-echo json_encode($arr);
-
-```
-
-FINAL: `app/environment.php`
----------------------------
-```php
-<?php
-
-define('DB_CONNECT',  'mysql:host=localhost;dbname=msis');
-define('DB_USER',     'root');
-define('DB_PASSWORD', '');
-
-set_include_path(__DIR__);
-chdir(__DIR__);
-
-require 'Model/StockPrice.php';
-
-// Add the path of each other model here
-
-```

@@ -1,9 +1,9 @@
 <?php
 require('../app/environment.php');
 
-$db = new PDO(DB_CONNECT, DB_USER, DB_PASSWORD); 
+$db = new PDO(DB_CONNECT, DB_USER, DB_PASSWORD);
 
-$statement = $db->prepare('SELECT * FROM StockPrice LIMIT 1'); // Warning: This returns *many* rows without the LIMIT!
+$statement = $db->prepare('SELECT * FROM StockPrice LIMIT 5'); // Warning: This returns *many* rows without the LIMIT!
 $success = $statement->execute();
 
 if (!$success) {
@@ -14,18 +14,7 @@ if (!$success) {
 
 $arr = array();
 while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-
-	$stock =  new StockPrice(
-	    $row['ticker'],
-		$row['date'],
-		$row['open'],
-		$row['high'],
-		$row['low'],
-		$row['volume'],
-		$row['close'],
-		$row['adjClose']
-	);
-	
+    $stock =  new StockPrice($row);
     array_push($arr, $stock);
 }
 
