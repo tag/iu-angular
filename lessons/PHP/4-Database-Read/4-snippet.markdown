@@ -16,12 +16,12 @@
 
   - [ ] Use PDO to create a database connection
 
-  ```php
-  <?php    // api/StockPrice.php
-  require '../php-app/environment.php';
-  
-  $db = new PDO(DB_CONNECT, DB_USER, DB_PASSWORD);
-  ```
+    ```php
+    <?php    // api/StockPrice.php
+    require '../php-app/environment.php';
+    
+    $db = new PDO(DB_CONNECT, DB_USER, DB_PASSWORD);
+    ```
 
     - This creates a database connection with our server.
     
@@ -112,14 +112,14 @@
   echo json_encode($arr);
   ```
   
-    - So for each row returned in our query, this code creates a new
-      `StockPrice` object and adds it to the output array.
-    
-    - It loops, so long as a row exists in the result set. (Explain `while`)
-    
-    - Each row of the result set gets stored in `$row`, which is a PHP
-      associative array. (Similar to arrays in Javascript.) If you're familiar
-      with other programming languages, it's really an ordered map, but we call
-      them arrays in PHP.
-    
+  - So for each row returned in our query, this code creates a new
+    `StockPrice` object and adds it to the output array.
+  
+  - It loops, so long as a row exists in the result set. (Explain `while`)
+  
+  - Each row of the result set gets stored in `$row`, which is a PHP
+    associative array. (Similar to arrays in Javascript.) If you're familiar
+    with other programming languages, it's really an ordered map, but we call
+    them arrays in PHP.
+  
   - [ ] Test whether it works.
