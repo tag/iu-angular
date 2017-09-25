@@ -23,10 +23,10 @@ $one = null;
 
 if ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
 
-	$steve =  new FullSteve(
-	    $row['id'],
-		$row['firstName'],
-		$row['lastName'],
+    $steve =  new FullSteve(
+        $row['id'],
+        $row['firstName'],
+        $row['lastName'],
         $row['email'],
         $row['description']
 	);
