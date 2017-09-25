@@ -56,17 +56,8 @@
     $arr = array();
     while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
     
-        $stock =  new StockPrice(
-    	    $row['ticker'],
-    		$row['date'],
-    		$row['open'],
-    		$row['high'],
-    		$row['low'],
-    		$row['volume'],
-    		$row['close'],
-    		$row['adjClose']
-        );
-		
+        $stock =  new StockPrice($row);
+        
         array_push($arr, $stock);
     }
 
