@@ -45,7 +45,7 @@
     
     ```js
     self.loadChart = function() {
-        var myChart = Highcharts.chart('container', {
+        var myChart = Highcharts.chart('myChart', {
                 title: {
                     text: 'Monthly Average Temperature',
                     x: -20 //center
